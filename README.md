@@ -1,6 +1,6 @@
 # Listeria-AMP-Design: A computational pipeline for designing anti-Listeria antimicrobial peptides
 
-基于生成式蛋白质语言模型与 ESM-2 序列表征的抗李斯特菌抗菌肽批量设计与预筛选管线，为后续实验验证提供候选分子优先级参考。
+A computational pipeline based on generative protein models and ESM-2 embeddings for high-throughput design and pre-screening of anti-Listeria antimicrobial peptides, to provide ranked candidates for subsequent wet-lab validation.
 
 ![Pipeline workflow](./workflow.png)
 
