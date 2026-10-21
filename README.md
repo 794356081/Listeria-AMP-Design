@@ -2,7 +2,7 @@
 
 基于生成式蛋白质语言模型与 ESM-2 序列表征的抗李斯特菌抗菌肽批量设计与预筛选管线，为后续实验验证提供候选分子优先级参考。
 
-![Pipeline workflow](workflow.png)
+![Pipeline workflow](./workflow.png)
 
 ---
 
