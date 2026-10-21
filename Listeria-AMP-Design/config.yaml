@@ -1,0 +1,59 @@
+# Central configuration for the Listeria-AMP-Design pipeline.
+# Paths are relative to the repository root unless an absolute path is supplied.
+# Command-line arguments override the values defined here.
+
+project:
+  seed: 20261019
+
+paths:
+  # Hugging Face model identifiers, or local directories containing the weights.
+  protgpt2_model: "nferruz/ProtGPT2"
+  esm2_model: "facebook/esm2_t33_650M_UR50D"
+
+generation:
+  target_sequences: 100000
+  min_length: 10
+  max_length: 50
+  prefix_length: 3            # N-terminal seed prefix used as the generation prompt
+  prompts_per_batch: 20
+  samples_per_prompt: 10
+  temperature: 0.85
+  top_p: 0.9
+  top_k: 40
+  repetition_penalty: 1.2
+  max_new_token_choices: [12, 15, 18, 20]
+  checkpoint_every_batches: 10
+
+physchem:
+  min_length: 10
+  max_length: 50
+  charge_min: -2.0
+  charge_max: 6.0
+  gravy_min: -1.5
+  gravy_max: 1.0
+  max_homopolymer_run: 5      # reject sequences containing >= 5 identical residues
+
+embedding:
+  model: "facebook/esm2_t33_650M_UR50D"
+  batch_size: 100
+  max_length: 1024
+  pooling: "mean_excluding_special_tokens"
+
+scoring:
+  weights:
+    esm_similarity: 0.45
+    cationic_amphipathic: 0.20
+    helix_propensity: 0.15
+    hydrophobicity_balance: 0.10
+    low_hemolysis: 0.10
+  high_activity_quantile: 0.5   # MIC <= median of labelled reference peptides
+  hydrophobicity_balance:
+    target_gravy: 0.2
+    sigma: 0.5
+  hemolysis_model:
+    min_labels: 16
+    min_cv_auc: 0.60
+    C: 0.1
+    max_iter: 3000
+    n_splits: 5
+  top_n: [100, 500]
